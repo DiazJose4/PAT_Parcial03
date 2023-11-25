@@ -19,9 +19,12 @@ string TimeMap::get(string key, int timestamp)
         return "";
     }
 
-    std::map<int, std::string>& timestampMap = claves[key];
+    auto& timestampMap = claves[key];
+    auto it = timestampMap.upper_bound(timestamp);
 
+    return (it != timestampMap.begin()) ? (--it)->second : "";
 
+    /* std::map<int, std::string>& timestampMap = claves[key];
     // instante de tiempo previo menor
     std::map<int, std::string>::iterator it = timestampMap.upper_bound(timestamp);
     if (it != timestampMap.begin()) {
@@ -30,5 +33,7 @@ string TimeMap::get(string key, int timestamp)
         return it->second;
     }
     //Si no existen valores retorna "".
-    return "";
+    return "";*/
+
+   
 }
